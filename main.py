@@ -1,41 +1,32 @@
+import streamlit as st
 from src.tracker import add_transaction, show_transactions
 from src.analysis import spending_by_category, monthly_spending
 
-while True:
+st.title("💰 ML Finance Tracker")
 
-    print("\n===== ML Finance Tracker =====")
+menu = st.selectbox("Choose option", [
+    "Add Transaction",
+    "View Transactions",
+    "Category Analysis",
+    "Monthly Spending"
+])
 
-    print("1 Add Transaction")
-    print("2 View Transactions")
-    print("3 Category Analysis")
-    print("4 Monthly Spending")
-    print("5 Exit")
+if menu == "Add Transaction":
+    amount = st.number_input("Enter amount")
+    description = st.text_input("Enter description")
 
-    choice = input("Enter choice: ")
-
-    if choice == "1":
-
-        amount = float(input("Enter amount: "))
-        description = input("Enter description: ")
-
+    if st.button("Add"):
         add_transaction(amount, description)
+        st.success("Transaction Added!")
 
-    elif choice == "2":
+elif menu == "View Transactions":
+    st.write("Transactions:")
+    show_transactions()
 
-        show_transactions()
+elif menu == "Category Analysis":
+    st.write("Category Analysis:")
+    spending_by_category()
 
-    elif choice == "3":
-
-        spending_by_category()
-
-    elif choice == "4":
-
-        monthly_spending()
-
-    elif choice == "5":
-
-        break
-
-    else:
-
-        print("Invalid option")
+elif menu == "Monthly Spending":
+    st.write("Monthly Spending:")
+    monthly_spending()
