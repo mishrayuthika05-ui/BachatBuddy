@@ -4,29 +4,40 @@ from src.analysis import spending_by_category, monthly_spending
 
 st.title("💰 ML Finance Tracker")
 
-menu = st.selectbox("Choose option", [
-    "Add Transaction",
-    "View Transactions",
-    "Category Analysis",
-    "Monthly Spending"
+st.write("===== ML Finance Tracker =====")
+
+choice = st.selectbox("Choose an option", [
+    "1 Add Transaction",
+    "2 View Transactions",
+    "3 Category Analysis",
+    "4 Monthly Spending",
+    "5 Exit"
 ])
 
-if menu == "Add Transaction":
-    amount = st.number_input("Enter amount")
-    description = st.text_input("Enter description")
+# Option 1
+if choice == "1 Add Transaction":
+    amount = st.number_input("Enter amount:")
+    description = st.text_input("Enter description:")
 
-    if st.button("Add"):
+    if st.button("Submit"):
         add_transaction(amount, description)
-        st.success("Transaction Added!")
+        st.success("Transaction added!")
 
-elif menu == "View Transactions":
+# Option 2
+elif choice == "2 View Transactions":
     st.write("Transactions:")
     show_transactions()
 
-elif menu == "Category Analysis":
+# Option 3
+elif choice == "3 Category Analysis":
     st.write("Category Analysis:")
     spending_by_category()
 
-elif menu == "Monthly Spending":
+# Option 4
+elif choice == "4 Monthly Spending":
     st.write("Monthly Spending:")
     monthly_spending()
+
+# Option 5
+elif choice == "5 Exit":
+    st.warning("App Closed (Refresh to restart)")
