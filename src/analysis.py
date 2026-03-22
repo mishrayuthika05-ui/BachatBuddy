@@ -1,40 +1,18 @@
 import pandas as pd
-import matplotlib.pyplot as plt
+import streamlit as st
 
-FILE = "data/user_transactions.csv"
+FILE = "data/transactions.csv"
 
 def spending_by_category():
-
-    df = pd.read_csv(FILE)
-
-    result = df.groupby("category")["amount"].sum()
-
-    print("\nSpending by Category\n")
-    print(result)
-
-    result.plot(kind="bar")
-
-    plt.title("Spending by Category")
-    plt.ylabel("Amount")
-
-    plt.show()
-
+    try:
+        df = pd.read_csv(FILE)
+        st.write(df.groupby("category")["amount"].sum())
+    except:
+        st.write("No data")
 
 def monthly_spending():
-
-    df = pd.read_csv(FILE)
-
-    df["date"] = pd.to_datetime(df["date"])
-    df["month"] = df["date"].dt.month
-
-    result = df.groupby("month")["amount"].sum()
-
-    print("\nMonthly Spending\n")
-    print(result)
-
-    result.plot(kind="line", marker="o")
-
-    plt.title("Monthly Spending Trend")
-    plt.ylabel("Amount")
-
-    plt.show()
+    try:
+        df = pd.read_csv(FILE)
+        st.write(df)
+    except:
+        st.write("No data")
