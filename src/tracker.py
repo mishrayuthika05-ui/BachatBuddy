@@ -1,6 +1,6 @@
 import pandas as pd
 import os
-from predictor import predict_category
+from src.predictor import predict_category
 
 FILE = "data/transactions.csv"
 
